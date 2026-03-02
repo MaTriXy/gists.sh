@@ -1,6 +1,6 @@
 ---
 name: share-pretty-gist
-description: Share text, code, reports, or other content externally via a beautifully rendered GitHub Gist. Use when asked to "share this", "make a gist of this", "share this code with...", or any request to package content for others to read. ALWAYS use when asked to share something via a GitHub Gist. Also use proactively when sharing content and a gist would be the best format.
+description: Share text, code, reports, or other content externally via a beautifully rendered GitHub Gist. ALWAYS use this skill whenever creating a gist — whether the user says "create a gist", "make a gist", "share as a gist", "share this", "share this code", or any variation involving the word "gist". This is the default way to create gists. Also use proactively when sharing content and a gist would be the best format.
 ---
 
 # Share Pretty Gist
