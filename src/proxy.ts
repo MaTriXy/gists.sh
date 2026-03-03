@@ -108,28 +108,6 @@ export function proxy(request: NextRequest) {
   const response = NextResponse.next();
   response.headers.set("Content-Security-Policy", csp);
 
-  // Force Vercel CDN to cache gist pages for 24h. Next.js sets
-  // Cache-Control: private, no-cache for pages with useSearchParams() in a
-  // Suspense boundary. We override both Cache-Control (to remove "private",
-  // which blocks CDN caching) and set Vercel-CDN-Cache-Control as the
-  // authoritative CDN directive.
-  // Vercel-Cache-Tag lets revalidateTag() in the refresh endpoint purge the
-  // CDN edge cache (not just the Data Cache) for the specific gist.
-  const isGistPage =
-    parts.length === 2 &&
-    /^[a-f0-9]{20}$|^[a-f0-9]{32}$/.test(parts[1]);
-  if (isGistPage) {
-    response.headers.set(
-      "Cache-Control",
-      "public, max-age=0, must-revalidate",
-    );
-    response.headers.set(
-      "Vercel-CDN-Cache-Control",
-      "public, s-maxage=86400",
-    );
-    response.headers.set("Vercel-Cache-Tag", `gist-${parts[1]}`);
-  }
-
   return applySecurityHeaders(response);
 }
 

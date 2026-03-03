@@ -27,8 +27,7 @@ export async function POST(
   }
 
   cooldowns.set(gistId, now);
-  // Purge the Data Cache (GitHub API responses) and the Vercel CDN edge cache
-  // (matched via Vercel-Cache-Tag set in proxy.ts) immediately
+  // Purge the Data Cache (GitHub API responses) immediately
   revalidateTag(`gist-${gistId}`, { expire: 0 });
   // Purge the Full Route Cache so the next request triggers a fresh render
   revalidatePath(`/${user}/${gistId}`);
